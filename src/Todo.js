@@ -23,6 +23,7 @@ function Todo() {
             {
                 
                 text:input,
+                date:moment().format("lll"),
                 timestamp: Date.now(),
               },
         
