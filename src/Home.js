@@ -1,23 +1,31 @@
-import { Button } from '@material-ui/core'
+import {IconButton } from '@material-ui/core'
 import Todo from './Todo'
-import React ,{useState}from 'react'
+import React,{useState} from 'react'
 import './Home.css'
-import { useHistory } from 'react-router-dom'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 
-
-function Home() {
-   
-    const history = useHistory()
-
+function Home(props) {
+    
     return (
         <div className="home">
 
-        <Button color="primary" variant="contained" onClick={()=>history.push("/")}> logout</Button>
+        <IconButton  onClick={() =>{
+            props.setIsToken(false);
+            props.setIsLoggedIn(false);
+            localStorage.removeItem('isToken')
+        }}>
+
+        <ExitToAppIcon />logout
+        </IconButton>
+
+        
         
         <div className="todo__part">
               
-                 <Todo/>
+                 <Todo />
+
+                
         </div>
 
          

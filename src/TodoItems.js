@@ -1,61 +1,50 @@
 import React ,{useState} from 'react'
 import { List , ListItem ,ListItemText, IconButton ,Checkbox} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete';
-
-
 import { makeStyles } from '@material-ui/core/styles';
 
-
-
-
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    position: 'absolute',
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-
-  ListItemStyles:{
-     backgroundColor:'white',
-    marginLeft:'-5%',
-    borderRadius:'20px'
+  paper:{
+    marginTop:'4rem',
+    backgroundColor:'white',
+    width:'80%',
+    marginLeft:'3rem',
+    borderRadius:'50px', 
   },
 }));
 
-function Todos({id,date,text,onDelete}) {
+function Todos({index, date, text, onDelete,data, items, setCompletedItems, setItems ,completedItems,isCompleted}) {
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
+console.log("TODOS ko data",data);
 
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
-
-
+  const updateItems = (index) => {
+    // console.log("updated list ",data);
+  data.isCompleted=true
+   console.log(index)
+   const completed = setCompletedItems([...completedItems,data]);
+    
+   console.log(completedItems)
+   
   };
-
-  
-    return (
+ 
+ 
+ return (
         <>
-       
-
-        <List className={classes.listStyles}>
+        <List className={classes.paper}>
         <ListItem className={classes.ListItemStyles}>
        
+            <Checkbox
+            checked={checked}
+            name="checked"
+            onClick={()=>updateItems(index)}
+            
+            
+          />
+           <ListItemText primary={text} secondary={date}/>
+      {(items.isCompleted === true) && <p>completed</p>}
       
-
-        <Checkbox
-        checked={checked}
-        onChange={handleChange}
-        
-        inputProps={{ 'aria-label': 'primary checkbox' }}
-      />
-      <ListItemText 
-      primary={text} secondary={date}/>
-      
-      
-          <IconButton onClick={() =>{onDelete(id)}}>
+          <IconButton onClick={() =>{onDelete(index)}}>
           <DeleteIcon />
           </IconButton>
           
